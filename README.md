@@ -1,2 +1,2 @@
 # fys-stk
-FYS-STK4155 Autumn 2020
+FYS-STK4155 - Applied Data Analysis and Machine Learning - Autumn 2020
