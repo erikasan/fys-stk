@@ -1,13 +1,15 @@
 import numpy as np
 from scipy.special import factorial
+import pandas as pd
 
-def design_matrix(x, y, N):
+def design_matrix(x, y, N, pandas = True):
     """
     Returns the design matrix that models
     the output z = f(x, y) as a 2-variable polynomial of degree N.
 
-    x, y: Arrays of input variables (must have same length!)
-    N:    Degree of polynomial
+    x, y:   Arrays of input variables (must have same length!)
+    N:      Degree of polynomial
+    pandas: Option to return the design matrix as a DataFrame, returns a numpy array if false
 
     """
 
@@ -24,6 +26,25 @@ def design_matrix(x, y, N):
                 continue
             X[:, col] = x**i * y**j
             col += 1
+
+    if pandas:
+        X = pd.DataFrame(X)
+
+        column_labels = cols*[]
+        for j in range(N+1):
+            for i in range(N+1):
+                if i + j > N:
+                    continue
+                if i == j == 0:
+                    column_labels.append("1")
+                elif j == 0 and i != 0:
+                    column_labels.append("x^{}".format(i))
+                elif i == 0 and j != 0:
+                    column_labels.append("y^{}".format(j))
+                else:
+                    column_labels.append("x^{}*y^{}".format(i, j))
+
+        X.columns = column_labels
 
     return X
 
