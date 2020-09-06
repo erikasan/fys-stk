@@ -11,7 +11,6 @@ def design_matrix(x, y, N):
 
     """
 
-
     cols = factorial(N+2)/(factorial(N)*factorial(2)) # Number of columns in the design matrix,
     cols = int(cols)                                  # i.e the number of terms in the polynomial
     rows = len(x)                                     # Number of rows in the design matrix
@@ -27,7 +26,6 @@ def design_matrix(x, y, N):
             col += 1
 
     return X
-
 
 """
 # Test implementation on some degree 1 polynomial
