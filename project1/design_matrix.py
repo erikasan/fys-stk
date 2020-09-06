@@ -13,7 +13,7 @@ def design_matrix(x, y, N):
 
 
     cols = factorial(N+2)/(factorial(N)*factorial(2)) # Number of columns in the design matrix,
-                                                      # i.e the number of terms in the polynomial
+    cols = int(cols)                                  # i.e the number of terms in the polynomial
     rows = len(x)                                     # Number of rows in the design matrix
 
     X = np.zeros((rows, cols))
@@ -23,7 +23,7 @@ def design_matrix(x, y, N):
         for i in range(N+1):
             if i + j > N:
                 continue
-            X[:, col] = x**i * y **j
+            X[:, col] = x**i * y**j
             col += 1
 
     return X
