@@ -19,7 +19,7 @@ class project1:
 
     def mean_squared_error(self, y_data, y_model):
         n = np.size(y_model)
-        return 1/n*np.sum(y_data - y_model)**2
+        return 1/n*np.sum((y_data - y_model)**2)
 
 
     def R_squared(self, y_data, y_model):
@@ -154,5 +154,3 @@ if __name__ == '__main__':
 #     plt.title('Franke fitted')
 #
 #     plt.show()
-
-
