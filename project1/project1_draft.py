@@ -66,18 +66,19 @@ class project1:
         bias = np.zeros(maxdegree)
         variance = np.zeros(maxdegree)
         MSE = np.zeros(maxdegree)
+        degree = np.arange(1,maxdegree+1)
         x, y, f_data = self.generate_data(datapoints, datapoints, noise)
-        for degree in range(1, maxdegree):
-            X = self.design_matrix(x, y, degree)
+        for i in range(maxdegree):
+            X = self.design_matrix(x, y, degree[i])
             X_train, X_test, f_train, f_test = train_test_split(X, f_data, test_size=0.2)
             X_train, X_test = self.scale(X_train, X_test)
             f_predict = np.empty((f_test.shape[0], N_bootstrap))
-            for i in range(N_bootstrap):
+            for j in range(N_bootstrap):
                 X_, f_ = resample(X_train, f_train)
-                f_predict[:,i] = X_test @ self.OLS(X_, f_)
-            bias[degree] = np.mean((f_test - np.mean(f_predict, axis=1))**2)
-            variance[degree] = np.mean(np.var(f_predict, axis=1))
-            MSE[degree] = np.mean(np.mean((f_test - f_predict.T)**2 , axis=1))
+                f_predict[:,j] = X_test @ self.OLS(X_, f_)
+            bias[i] = np.mean((f_test - np.mean(f_predict, axis=1))**2)
+            variance[i] = np.mean(np.var(f_predict, axis=1))
+            MSE[i] = np.mean(np.mean((f_test - f_predict.T)**2 , axis=1))
         return  bias, variance, MSE
 
     def kfold(self, datapoints, k, degree, noise):
@@ -126,11 +127,12 @@ if __name__ == '__main__':
     def plotting_test_vs_train():
         P1 = project1()
         x, y, f_data = P1.generate_data(500, 500, False)
-        degrees = np.arange(30)
+        maxdegree = 30
+        degrees = np.arange(1, maxdegree)
         MSEtest = np.zeros(len(degrees))
         MSEtrain = np.zeros(len(degrees))
-        for i in range(1, len(degrees)):
-            X = P1.design_matrix(x, y, i)
+        for i in range(maxdegree-1):
+            X = P1.design_matrix(x, y, degrees[i])
             X_train, X_test, f_train, f_test = train_test_split(X, f_data, test_size=0.2)
             X_train_scaled, X_test_scaled = P1.scale(X_train, X_test)
             beta = P1.OLS(X_train_scaled, f_train)
