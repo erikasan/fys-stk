@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
 from sklearn.metrics import mean_squared_error
-
+from design_matrix import design_matrix
 
 
 def cross_validation(x, y, z, method, N, K = 5):
@@ -25,7 +25,7 @@ def cross_validation(x, y, z, method, N, K = 5):
 
     MSE = 0
     counter = 0
-    for train_index, test_index in kfold.split(X):
+    for train_index, test_index in kfold.split(x):
         x_train = x[train_index]; x_test = x[test_index]
         y_train = y[train_index]; y_test = y[test_index]
 
@@ -36,7 +36,7 @@ def cross_validation(x, y, z, method, N, K = 5):
         prediction = method(X_train, z_train)
 
         z_predict = prediction(x_test, y_test)
-        MSE += mean_squared_error(z, z_predict)
+        MSE += mean_squared_error(z_test, z_predict)
 
         counter += 1
 
