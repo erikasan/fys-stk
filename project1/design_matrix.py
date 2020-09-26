@@ -13,9 +13,9 @@ def design_matrix(x, y, N, pandas = True):
 
     """
 
-    cols = factorial(N+2)/(factorial(N)*factorial(2)) # Number of columns in the design matrix,
-    cols = int(cols)                                  # i.e the number of terms in the polynomial
-    rows = len(x)                                     # Number of rows in the design matrix
+    cols = (N + 2)*(N + 1)/2        # Number of columns in the design matrix,
+    cols = int(cols)                # i.e the number of terms in the polynomial
+    rows = len(x)                   # Number of rows in the design matrix
 
     X = np.zeros((rows, cols))
 
@@ -60,8 +60,7 @@ y = np.random.rand(3) # A first degree polynomial is also the equation for a pla
 
 X = design_matrix(x, y, 1)
 
-z = np.zeros(len(x))  # Generate a "data set", output z from inputs x and y
-z = f(x, y)
+z = f(x, y) # Generate a "data set", output z from inputs x and y
 
 beta = np.linalg.inv(X.T @ X) @ X.T @ z
 """
