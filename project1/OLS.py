@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def OLS(X, z):
+def OLS(X, z, lam = None):
     """
     Given a design matrix X containing information about the
     input data and the linear model, and the output data z, returns
