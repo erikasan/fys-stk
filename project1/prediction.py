@@ -1,7 +1,6 @@
+import numpy as np
 
-
-
-def give_prediction(beta):
+def get_prediction(beta):
     """
     Given the vector of coefficients beta provided by
     OLS, Ridge, LASSO, etc, returns the prediction 'prediction(x, y)'
@@ -28,7 +27,7 @@ def give_prediction(beta):
 
 # Example of use + verification
 
-
+"""
 import numpy as np
 from design_matrix import design_matrix
 from ridge import ridge
@@ -45,8 +44,8 @@ X = design_matrix(x, y, 1, pandas = False)
 
 beta = ridge(X, z, 0)
 
-f_predict = give_prediction(beta)
-
+f_predict = get_prediction(beta)
+"""
 
 """
 In [75]: f_predict(0, 0)
