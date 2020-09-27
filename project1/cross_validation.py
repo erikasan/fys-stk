@@ -3,9 +3,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
 from sklearn.metrics import mean_squared_error
 from design_matrix import design_matrix
+from prediction import get_prediction
 
 
-def cross_validation(x, y, z, method, N, K = 5):
+def cross_validation(x, y, z, method, N, K = 5, lam = None):
     """
     Performs K-fold cross validation of a method
 
@@ -23,7 +24,7 @@ def cross_validation(x, y, z, method, N, K = 5):
 
     kfold = KFold(K)
 
-    MSE = 0
+    MSE     = 0
     counter = 0
     for train_index, test_index in kfold.split(x):
         x_train = x[train_index]; x_test = x[test_index]
@@ -33,11 +34,12 @@ def cross_validation(x, y, z, method, N, K = 5):
 
         X_train = design_matrix(x_train, y_train, N)
 
-        prediction = method(X_train, z_train)
+        beta       = method(X_train, z_train, lam)
+        prediction = get_prediction(beta)
 
         z_predict = prediction(x_test, y_test)
-        MSE += mean_squared_error(z_test, z_predict)
 
+        MSE     += mean_squared_error(z_test, z_predict)
         counter += 1
 
     MSE /= counter
