@@ -2,7 +2,7 @@ import numpy as np
 from design_matrix import design_matrix
 from cross_validation import cross_validation
 
-def ridge(X, z, lam):
+def ridge(X, z, lam = 0):
     """
     Given a design matrix X containing information about the
     input data and the linear model, and the output data z, returns
