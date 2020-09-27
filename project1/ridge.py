@@ -36,6 +36,7 @@ lam = 0.00001
 beta = ridge(X, z, lam)
 print(beta)
 """
+
 """
 In [32]: run ridge.py
 [ 3.14925735  2.70942823 41.99388081]
