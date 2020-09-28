@@ -126,7 +126,7 @@ if __name__ == '__main__':
 
     def plotting_test_vs_train():
         P1 = project1()
-        x, y, f_data = P1.generate_data(500, 500, False)
+        x, y, f_data = P1.generate_data(500, 500, True)
         maxdegree = 30
         degrees = np.arange(1, maxdegree)
         MSEtest = np.zeros(len(degrees))
@@ -142,6 +142,9 @@ if __name__ == '__main__':
             MSEtest[i] = P1.mean_squared_error(f_test, f_test_model)
         plt.plot(degrees, MSEtest, label='test')
         plt.plot(degrees, MSEtrain, label='train')
+        plt.title('Test vs Train Error')
+        plt.ylabel('MSE')
+        plt.xlabel('Complexity (plynomial degree)')
         plt.legend()
         plt.yscale('log')
         plt.show()
@@ -150,19 +153,23 @@ if __name__ == '__main__':
     def plotting_bootstrap():
         P1 = project1()
         maxdegree = 25
-        n_boot = 50
-        datapoints = 1000
-        bias, variance, MSE = P1.bootstrap(datapoints, n_boot, maxdegree, noise=False)
+        n_boot = 20
+        datapoints = 5000
+        bias, variance, MSE = P1.bootstrap(datapoints, n_boot, maxdegree, noise=True)
         polydegree = np.arange(maxdegree)
         plt.plot(polydegree, bias, label='Bias')
         plt.plot(polydegree, variance, label='var')
         plt.plot(polydegree, MSE, label='MSE')
         plt.legend()
         plt.yscale('log')
+        plt.ylabel('MSE')
+        plt.xlabel('Complexity (Polynomial degree)')
+        plt.title('Bias-Variance using bootstrap')
         plt.show()
     plotting_bootstrap()
 
     def plotting_kfold():
+        P1 = project1()
         degrees = np.arange(25)
         R2 = np.zeros(len(degrees))
         MSE = np.zeros(len(degrees))
