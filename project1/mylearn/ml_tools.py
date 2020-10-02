@@ -7,6 +7,7 @@ import numpy as np
 from matplotlib import cm
 from matplotlib.ticker import FormatStrFormatter, LinearLocator
 from mpl_toolkits.mplot3d import Axes3D
+from mylearn.project_tools import fig_path
 
 
 def rss(ytilde, y):
@@ -135,7 +136,7 @@ def plotFranke(save=False):
     ax.view_init(elev=15, azim=45)
     plt.show()
     if save:
-        fig.savefig("Franke_func.png")
+        fig.savefig(fig_path("Franke_func.png"), dpi=300)
 
 
 def plot_CI(CI, save=False):
@@ -155,4 +156,4 @@ def plot_CI(CI, save=False):
     plt.yticks(np.arange(len(CI)), labels)
     plt.show()
     if save:
-        fig.savefig("beta_confidence_interval.png")
+        fig.savefig(fig_path("beta_confidence_interval.png"), dpi=300)
