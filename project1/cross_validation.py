@@ -6,7 +6,7 @@ from design_matrix import design_matrix
 from prediction import get_prediction
 
 
-def cross_validation(x, y, z, method, N, K = 5, lam = None):
+def cross_validation(x, y, z, method, p, K = 5, lam = None):
     """
     Performs K-fold cross validation of a method
 
@@ -14,7 +14,7 @@ def cross_validation(x, y, z, method, N, K = 5, lam = None):
         x, y (array):      Input data
         z (array):         Output data
         method (function): The method we want to evaluate (e.g OLS, Ridge)
-        N (int):           The polynomial degree of the model
+        p (int):           The polynomial degree of the model
         K (int):           The number of partitions of the input data
 
     Returns:
@@ -32,7 +32,7 @@ def cross_validation(x, y, z, method, N, K = 5, lam = None):
 
         z_train = z[train_index]; z_test = z[test_index]
 
-        X_train = design_matrix(x_train, y_train, N)
+        X_train = design_matrix(x_train, y_train, p)
 
         beta       = method(X_train, z_train, lam)
         prediction = get_prediction(beta)

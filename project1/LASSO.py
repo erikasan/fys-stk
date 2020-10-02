@@ -9,6 +9,9 @@ def LASSO(X, z, lam = 0):
 
 # Example of use + Verifaction
 
+
+
+"""
 import numpy as np
 from design_matrix import design_matrix
 from prediction import get_prediction
@@ -25,6 +28,7 @@ X = design_matrix(x, y, 1, pandas = False)
 beta = LASSO(X, z, 0.000001)
 
 f_predict = get_prediction(beta)
+"""
 
 """
 In [123]: f_predict(0, 0)

@@ -1,6 +1,6 @@
 import numpy as np
 
-def bootstrap(data, statistic, B):
+def bootstrap(data, statistic, B, uncertainty = False):
     """
     Estimates some statistic of an array of data using the bootstrap method
     Also gives the uncertainty of said statistic
@@ -25,13 +25,16 @@ def bootstrap(data, statistic, B):
 
         statistics[i] = statistic(sample)
 
-    unbiased_var = B/(B - 1)*np.var(statistics)
-    unbiased_std = np.sqrt(unbiased_var)
+    if uncertainty:
+        unbiased_var = B/(B - 1)*np.var(statistics)
+        unbiased_std = np.sqrt(unbiased_var)
 
-    uncertainty = 2.576*unbiased_std # 99% confidence interval
+        uncertainty = 2.576*unbiased_std # 99% confidence interval
 
-    return np.mean(statistics), uncertainty
+        return np.mean(statistics), uncertainty
 
+    else:
+        return np.mean(statistics)
 
 # Examples of use + validation
 

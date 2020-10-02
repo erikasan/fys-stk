@@ -8,11 +8,9 @@ def ridge(X, z, lam = 0):
     input data and the linear model, and the output data z, returns
     the two-variable polynomial function which predicts the output data.
 
-
     """
 
-    p = X.shape[1]
-    I = np.eye(p)
+    I = np.eye(X.shape[1])
 
 
     beta = np.linalg.inv(X.T@X + lam*I)@X.T@ z
