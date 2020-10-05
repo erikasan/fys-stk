@@ -50,7 +50,7 @@ for j, p in enumerate(polynomial_degrees):
     for i, lam in enumerate(lambdas):
         for B in range(bootstraps):
             X_, z_          = resample(X, z_train)
-            beta           = ridge(X_, z_, lam)
+            beta            = ridge(X_, z_, lam)
             model           = get_prediction(beta)
             z_predict[:, B] = model(x_test, y_test)
 
