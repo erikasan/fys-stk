@@ -17,6 +17,7 @@ from sklearn.metrics import mean_squared_error
 np.random.seed(16091995)
 
 n_datapoints = 1000
+bootstraps = 100
 
 
 x = np.random.rand(n_datapoints)
@@ -31,22 +32,64 @@ polynomial_degrees = np.arange(p_min, p_max + 1, 1)
 
 lambdas = np.logspace(-16, -5, 20)
 
-MSE = np.zeros((lambdas.size, polynomial_degrees.size))
+x_train, x_test, y_train, y_test, z_train, z_test = train_test_split(x, y, z, test_size = 0.2)
 
-for i, lam in enumerate(lambdas):
-    for j, p in enumerate(polynomial_degrees):
-        MSE[i, j] = cross_validation(x, y, z, ridge, p, K = 5, lam = lam)
+bias     = np.zeros((lambdas.size, polynomial_degrees.size))
+variance = np.zeros((lambdas.size, polynomial_degrees.size))
+MSE      = np.zeros((lambdas.size, polynomial_degrees.size))
 
 
-vmin = MSE.min()
-#vmax = MSE.max()
-vmax = 0.006
+# for i, lam in enumerate(lambdas):
+#     for j, p in enumerate(polynomial_degrees):
+#         MSE[i, j] = cross_validation(x, y, z, ridge, p, K = 5, lam = lam)
 
-MSE = pd.DataFrame(MSE)
+
+for j, p in enumerate(polynomial_degrees):
+    z_predict = np.zeros((z_test.shape[0], bootstraps))
+    X = design_matrix(x_train, y_train, p, pandas = False)
+    for i, lam in enumerate(lambdas):
+        for B in range(bootstraps):
+            X_, z_          = resample(X, z_train)
+            beta           = ridge(X_, z_, lam)
+            model           = get_prediction(beta)
+            z_predict[:, B] = model(x_test, y_test)
+
+        bias[i, j]     = np.mean((z_test - np.mean(z_predict, axis=1, keepdims=True))**2)
+        variance[i, j] = np.mean(np.var(z_predict, axis=1, keepdims=True))
+
+# Plot MSE
+
+# vmin = MSE.min()
+# #vmax = MSE.max()
+# vmax = 0.006
+#
+# MSE = pd.DataFrame(MSE)
+#
+# sns.set()
+#
+# sns.heatmap(MSE,
+#             square      = True,
+#             xticklabels = polynomial_degrees,
+#             yticklabels = np.round(np.log10(lambdas), 2),
+#             cmap        = 'rainbow',
+#             vmin        = vmin,
+#             vmax        = vmax)
+#
+# plt.xlabel(r'Polynomial degree')
+# plt.ylabel(r'$\log( \lambda )$')
+#
+# plt.show()
+
+# Plot bias
+
+vmin = bias.min()
+vmax = bias.max()
+
+bias = pd.DataFrame(bias)
 
 sns.set()
 
-sns.heatmap(MSE,
+sns.heatmap(bias,
             square      = True,
             xticklabels = polynomial_degrees,
             yticklabels = np.round(np.log10(lambdas), 2),
@@ -58,3 +101,26 @@ plt.xlabel(r'Polynomial degree')
 plt.ylabel(r'$\log( \lambda )$')
 
 plt.show()
+
+
+# Plot variance
+
+# vmin = variance.min()
+# vmax = variance.max()
+#
+# variance = pd.DataFrame(variance)
+#
+# sns.set()
+#
+# sns.heatmap(variance,
+#             square      = True,
+#             xticklabels = polynomial_degrees,
+#             yticklabels = np.round(np.log10(lambdas), 2),
+#             cmap        = 'rainbow',
+#             vmin        = vmin,
+#             vmax        = vmax)
+#
+# plt.xlabel(r'Polynomial degree')
+# plt.ylabel(r'$\log( \lambda )$')
+#
+# plt.show()
