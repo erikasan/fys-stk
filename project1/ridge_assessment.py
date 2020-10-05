@@ -5,7 +5,6 @@ import seaborn as sns
 
 from design_matrix import design_matrix
 from ridge import ridge
-from OLS import OLS
 from cross_validation import cross_validation
 from prediction import get_prediction
 from FrankeFunction import FrankeFunction
@@ -17,20 +16,20 @@ from sklearn.metrics import mean_squared_error
 
 np.random.seed(16091995)
 
-n_datapoints = 200
+n_datapoints = 1000
 
 
 x = np.random.rand(n_datapoints)
 y = np.random.rand(n_datapoints)
-z = FrankeFunction(x, y) #+ 0.2*np.random.normal(0, 1, n_datapoints)
+z = FrankeFunction(x, y) + 0.05*np.random.normal(0, 1, n_datapoints)
 
 
-p_min = 3
-p_max = 25
+p_min = 6
+p_max = 20
 polynomial_degrees = np.arange(p_min, p_max + 1, 1)
 
 
-lambdas = np.logspace(-9, -6, 30)
+lambdas = np.logspace(-16, -5, 20)
 
 MSE = np.zeros((lambdas.size, polynomial_degrees.size))
 
@@ -41,7 +40,7 @@ for i, lam in enumerate(lambdas):
 
 vmin = MSE.min()
 #vmax = MSE.max()
-vmax = 0.004
+vmax = 0.006
 
 MSE = pd.DataFrame(MSE)
 
@@ -51,7 +50,6 @@ sns.heatmap(MSE,
             xticklabels = polynomial_degrees,
             yticklabels = np.round(np.log10(lambdas), 2),
             cmap        = 'rainbow',
-            #annot       = np.round(MSE, 3),
             vmin        = vmin,
             vmax        = vmax)
 
