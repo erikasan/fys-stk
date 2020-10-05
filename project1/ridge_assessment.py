@@ -44,6 +44,7 @@ vmax = 0.006
 
 MSE = pd.DataFrame(MSE)
 
+sns.set()
 
 sns.heatmap(MSE,
             square      = True,
