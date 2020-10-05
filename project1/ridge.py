@@ -12,8 +12,7 @@ def ridge(X, z, lam = 0):
 
     I = np.eye(X.shape[1])
 
-
-    beta = np.linalg.inv(X.T@X + lam*I)@X.T@ z
+    beta = np.linalg.pinv(X.T@X + lam*I)@X.T@z
 
     return beta
 
