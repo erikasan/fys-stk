@@ -106,7 +106,6 @@ class LinearRegression(StatisticalMetrics):
             X = X.reshape(-1, 1)
         return self.intercept_ + X @ self.coef_
 
-# Confidence interval
     def coef_CI(self, critical_value=1.96):
         """
         Estimate a confidence interval of the coefficients
@@ -120,8 +119,9 @@ class LinearRegression(StatisticalMetrics):
         """
         beta_std = np.sqrt(np.diag(self._inv_xTx))
         beta = self.coef_
-        CI = [[beta[i] - critical_value * beta_std[i], beta[i] + critical_value * beta_std[i]]
-              for i in range(len(beta))]
+        data_mse_sqrt = np.sqrt(self.mse(self.data, self.target))
+        CI = [[beta[i] - critical_value * beta_std[i] * data_mse_sqrt, beta[i] +
+               critical_value * beta_std[i] * data_mse_sqrt]for i in range(len(beta))]
         return CI
 
 

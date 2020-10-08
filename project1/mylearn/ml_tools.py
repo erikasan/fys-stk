@@ -110,10 +110,12 @@ def normalize_data(X_train, X_test, with_intercept=True):
         return X_train_norm, X_test_norm
 
 
-def normalize_X(X):
-    X_mean = np.mean(X, axis=0)
-    X_std = np.std(X, axis=0)
-    return X - X_mean[np.newaxis, :] / X_std[np.newaxis, :]
+def normalize_target(target_train, target_test):
+    target_train_mean = np.mean(target_train)
+    target_train_std = np.std(target_train)
+    target_train_norm = target_train - target_train_mean / target_train_std
+    target_test_norm = target_test - target_train_mean / target_train_std
+    return target_train_norm, target_test_norm
 
 
 def plotFranke(save=False):
