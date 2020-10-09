@@ -8,7 +8,7 @@ from matplotlib import cm
 from matplotlib.ticker import FormatStrFormatter, LinearLocator
 from mpl_toolkits.mplot3d import Axes3D
 from mylearn.project_tools import fig_path
-
+from mylearn.linear_model import LinearRegression
 
 def rss(ytilde, y):
     """
@@ -160,7 +160,7 @@ def plot_CI(CI, save=False):
     if save:
         fig.savefig(fig_path("beta_confidence_interval.png"), dpi=300)
 
-def Kfold(k, deg):
+def Kfold(k, deg, n):
     x = np.random.rand(n)
     y = np.random.rand(n)
     z = frankeFunction(x, y) + 0.05*np.random.normal(0, 1, n)
