@@ -10,8 +10,8 @@
 ## Testing 
 * Contains all code testing that provide discussed results
 
-## images
-* images
+## Figures
+* result images
 
 ## Drafts
 * Not used codes
