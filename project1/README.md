@@ -11,6 +11,9 @@ All code written by Oda Hovet (odasho), Ilse Kuperus (ilseku) and Erik Alexander
 > * Fitting and predicting using OLS and Ridge regression
 > * kfold
 
+* Ridge assessment
+* Lasso assessment 
+
 ## Test
 * FysStk-project1-mylearn.ipynb contains (needs to be in same folder as mylearn, so we have also a copy of mylearn here):
 > * calculation of the MSE
@@ -19,9 +22,8 @@ All code written by Oda Hovet (odasho), Ilse Kuperus (ilseku) and Erik Alexander
 > * implementation of k-fold as a function of complexity
 > * implementation of the methods on terrain data
 
-* Ridge assessment
-* Lasso assessment 
-
+* Plotting ridge 
+* Plotting lasso 
 
 ## Figures
 * Result images
