@@ -3,10 +3,11 @@
 ## Report Folder
 * Contains the PDF file of the report 
 
-
 ## Code 
-* mylearn is a folder of code that can be imported to test 
-* Contains all the code for solving project 1
+* mylearn 
+> * MSE, R2 methods 
+> * OLS fitting, predicting
+> * kfold 
 
 ## Testing 
 * FysStk-project1-mylearn.ipynb contains:
@@ -21,4 +22,4 @@
 * result images
 
 ## Drafts
-* Not used codes
+* Codes not used for final results 
