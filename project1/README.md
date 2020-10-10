@@ -24,4 +24,4 @@ All code written by Oda Hovet (odasho), Ilse Kuperus (ilseku) and Erik Alexander
 * Result images
 
 ## Drafts
-* Codes not used for final results
+* Drafts for the final report and code not used for final results
