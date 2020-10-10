@@ -163,10 +163,7 @@ def plot_CI(CI, sigma, save=False):
     if save:
         fig.savefig(fig_path("beta_confidence_interval_N=10_sigma1.png"), dpi=300)
 
-def Kfold(k, deg, n):
-    x = np.random.rand(n)
-    y = np.random.rand(n)
-    z = frankeFunction(x, y) + 0.05*np.random.normal(0, 1, n)
+def Kfold(k, x, y, z, deg, n):
     X = designMatrix(x, y, deg, with_intercept=False)
     j = np.arange(len(z))
     np.random.shuffle(j)
