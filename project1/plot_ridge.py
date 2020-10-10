@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -13,30 +14,42 @@ polynomial_degrees = np.arange(p_min, p_max + 1, 1)
 
 lambdas = np.logspace(-20, -1, 50)
 
+xticks = np.arange(2, 29, 2)
+yticks = np.arange(2, 50, 10)
+
+
+
 # Plot MSE_cross
 
 
 # MSE_cross = np.load('MSE_cross_ridge.npy')
-
+#
 # vmin = MSE_cross.min()
 # vmax = MSE_cross.max()
-# #vmax = 0.006
+# vmax = 0.006
 #
 # MSE_cross = pd.DataFrame(MSE_cross)
 #
 # sns.set()
 #
+#
 # sns.heatmap(MSE_cross,
-#             square      = True,
-#             xticklabels = polynomial_degrees,
-#             yticklabels = np.round(np.log10(lambdas), 2),
+#             square      = False,
+#             #xticklabels = polynomial_degrees,
+#             #yticklabels = np.round(np.log10(lambdas), 2),
+#             #xticklabels = xticklabels,
 #             cmap        = 'rainbow',
 #             vmin        = vmin,
 #             vmax        = vmax)
 #
+#
+# plt.title('MSE with 5-fold cross validation')
+# plt.xticks(ticks = xticks, labels = xticks, rotation='horizontal')
+# plt.yticks(ticks = yticks, labels = np.round(np.log10(lambdas), 0)[0:-1:10], rotation='horizontal')
 # plt.xlabel(r'Polynomial degree')
 # plt.ylabel(r'$\log( \lambda )$')
-#
+# plt.tight_layout()
+# plt.savefig('MSE_cross_ridge.png', type = 'png')
 # plt.show()
 
 
@@ -44,26 +57,30 @@ lambdas = np.logspace(-20, -1, 50)
 
 
 # MSE_boot = np.load('MSE_boot_ridge.npy')
-
+#
 # vmin = MSE_boot.min()
 # vmax = MSE_boot.max()
-# #vmax = 0.006
+# vmax = 0.005
 #
 # MSE_boot = pd.DataFrame(MSE_boot)
 #
 # sns.set()
 #
 # sns.heatmap(MSE_boot,
-#             square      = True,
+#             square      = False,
 #             xticklabels = polynomial_degrees,
 #             yticklabels = np.round(np.log10(lambdas), 2),
 #             cmap        = 'rainbow',
 #             vmin        = vmin,
 #             vmax        = vmax)
 #
+# plt.title('MSE with Bootstrap')
+# plt.xticks(ticks = xticks, labels = xticks, rotation='horizontal')
+# plt.yticks(ticks = yticks, labels = np.round(np.log10(lambdas), 0)[0:-1:10], rotation='horizontal')
 # plt.xlabel(r'Polynomial degree')
 # plt.ylabel(r'$\log( \lambda )$')
-#
+# plt.tight_layout()
+# plt.savefig('MSE_boot_ridge.png', type = 'png')
 # plt.show()
 
 
@@ -72,8 +89,8 @@ lambdas = np.logspace(-20, -1, 50)
 
 
 # bias = np.load('bias_ridge.npy')
-
-
+#
+#
 # vmin = bias.min()
 # vmax = bias.max()
 #
@@ -82,41 +99,50 @@ lambdas = np.logspace(-20, -1, 50)
 # sns.set()
 #
 # sns.heatmap(bias,
-#             square      = True,
+#             square      = False,
 #             xticklabels = polynomial_degrees,
 #             yticklabels = np.round(np.log10(lambdas), 2),
 #             cmap        = 'rainbow',
 #             vmin        = vmin,
 #             vmax        = vmax)
 #
+# plt.title('Bias with Bootstrap')
+# plt.xticks(ticks = xticks, labels = xticks, rotation='horizontal')
+# plt.yticks(ticks = yticks, labels = np.round(np.log10(lambdas), 0)[0:-1:10], rotation='horizontal')
 # plt.xlabel(r'Polynomial degree')
 # plt.ylabel(r'$\log( \lambda )$')
-#
+# plt.tight_layout()
+# plt.savefig('bias_ridge.png', type = 'png')
 # plt.show()
 
 
 # Plot variance
 
 
-# variance = np.load('variance_ridge.npy')
+variance = np.load('variance_ridge.npy')
 
 
-# vmin = variance.min()
-# vmax = variance.max()
-#
-# variance = pd.DataFrame(variance)
-#
-# sns.set()
-#
-# sns.heatmap(variance,
-#             square      = True,
-#             xticklabels = polynomial_degrees,
-#             yticklabels = np.round(np.log10(lambdas), 2),
-#             cmap        = 'rainbow',
-#             vmin        = vmin,
-#             vmax        = vmax)
-#
-# plt.xlabel(r'Polynomial degree')
-# plt.ylabel(r'$\log( \lambda )$')
-#
-# plt.show()
+vmin = variance.min()
+vmax = variance.max()
+#vmax = 0.006
+
+variance = pd.DataFrame(variance)
+
+sns.set()
+
+sns.heatmap(variance,
+            square      = False,
+            xticklabels = polynomial_degrees,
+            yticklabels = np.round(np.log10(lambdas), 2),
+            cmap        = 'rainbow',
+            vmin        = vmin,
+            vmax        = vmax)
+
+plt.title('Variance with Bootstrap')
+plt.xticks(ticks = xticks, labels = xticks, rotation='horizontal')
+plt.yticks(ticks = yticks, labels = np.round(np.log10(lambdas), 0)[0:-1:10], rotation='horizontal')
+plt.xlabel(r'Polynomial degree')
+plt.ylabel(r'$\log( \lambda )$')
+plt.tight_layout()
+plt.savefig('var_ridge.png', type = 'png')
+plt.show()
