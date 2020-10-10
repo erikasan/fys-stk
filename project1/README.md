@@ -19,6 +19,9 @@ All code written by Oda Hovet (odasho), Ilse Kuperus (ilseku) and Erik Alexander
 > * implementation of k-fold as a function of complexity
 > * implementation of the methods on terrain data
 
+* Ridge assessment
+* Lasso assessment 
+
 
 ## Figures
 * Result images
