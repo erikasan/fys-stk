@@ -22,7 +22,7 @@ yticks = np.arange(2, 50, 10)
 # Plot MSE_cross
 
 
-# MSE_cross = np.load('MSE_cross_ridge.npy')
+MSE_cross = np.load('MSE_cross_ridge.npy')
 #
 # vmin = MSE_cross.min()
 # vmax = MSE_cross.max()
@@ -56,7 +56,7 @@ yticks = np.arange(2, 50, 10)
 # Plot MSE_boot
 
 
-# MSE_boot = np.load('MSE_boot_ridge.npy')
+MSE_boot = np.load('MSE_boot_ridge.npy')
 #
 # vmin = MSE_boot.min()
 # vmax = MSE_boot.max()
@@ -119,30 +119,30 @@ yticks = np.arange(2, 50, 10)
 # Plot variance
 
 
-variance = np.load('variance_ridge.npy')
-
-
-vmin = variance.min()
-vmax = variance.max()
-#vmax = 0.006
-
-variance = pd.DataFrame(variance)
-
-sns.set()
-
-sns.heatmap(variance,
-            square      = False,
-            xticklabels = polynomial_degrees,
-            yticklabels = np.round(np.log10(lambdas), 2),
-            cmap        = 'rainbow',
-            vmin        = vmin,
-            vmax        = vmax)
-
-plt.title('Variance with Bootstrap')
-plt.xticks(ticks = xticks, labels = xticks, rotation='horizontal')
-plt.yticks(ticks = yticks, labels = np.round(np.log10(lambdas), 0)[0:-1:10], rotation='horizontal')
-plt.xlabel(r'Polynomial degree')
-plt.ylabel(r'$\log( \lambda )$')
-plt.tight_layout()
-plt.savefig('var_ridge.png', type = 'png')
-plt.show()
+# variance = np.load('variance_ridge.npy')
+#
+#
+# vmin = variance.min()
+# vmax = variance.max()
+# #vmax = 0.006
+#
+# variance = pd.DataFrame(variance)
+#
+# sns.set()
+#
+# sns.heatmap(variance,
+#             square      = False,
+#             xticklabels = polynomial_degrees,
+#             yticklabels = np.round(np.log10(lambdas), 2),
+#             cmap        = 'rainbow',
+#             vmin        = vmin,
+#             vmax        = vmax)
+#
+# plt.title('Variance with Bootstrap')
+# plt.xticks(ticks = xticks, labels = xticks, rotation='horizontal')
+# plt.yticks(ticks = yticks, labels = np.round(np.log10(lambdas), 0)[0:-1:10], rotation='horizontal')
+# plt.xlabel(r'Polynomial degree')
+# plt.ylabel(r'$\log( \lambda )$')
+# plt.tight_layout()
+# plt.savefig('var_ridge.png', type = 'png')
+# plt.show()

@@ -23,16 +23,16 @@ y = np.random.rand(n_datapoints)
 z = FrankeFunction(x, y) + 0.05*np.random.normal(0, 1, n_datapoints)
 
 
-p_min = 2
-p_max = 30
+p_min = 20
+p_max = 21
 polynomial_degrees = np.arange(p_min, p_max + 1, 1)
 
 
-lambdas = np.logspace(-20, -1, 50)
+lambdas = np.logspace(-20, -6, 2)
 
 x_train, x_test, y_train, y_test, z_train, z_test = train_test_split(x, y, z, test_size = 0.2)
 
-scaler = StandardScaler()
+
 
 
 bias      = np.zeros((lambdas.size, polynomial_degrees.size))
@@ -89,7 +89,7 @@ for j, p in enumerate(polynomial_degrees):
 
         MSE_cross[i, j] /= counter
 
-np.save('bias_ridge', bias)
-np.save('variance_ridge', variance)
-np.save('MSE_boot_ridge', MSE_boot)
-np.save('MSE_cross_ridge', MSE_cross)
+# np.save('bias_ridge', bias)
+# np.save('variance_ridge', variance)
+# np.save('MSE_boot_ridge', MSE_boot)
+# np.save('MSE_cross_ridge', MSE_cross)
