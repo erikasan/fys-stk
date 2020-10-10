@@ -125,7 +125,9 @@ def plotFranke(save=False):
     z = frankeFunction(x, y)
     fig = plt.figure(figsize=(10, 10))
     ax = fig.gca(projection="3d")
-    surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm, lw=0, antialiased=False)
+    ax.grid(False)
+    surf = ax.plot_surface(x, y, z, cmap="turbo", lw=0,
+                           alpha=0.8, antialiased=False)
     ax.set_zlim(-0.10, 1.40)
     ax.zaxis.set_major_locator(LinearLocator(10))
     ax.zaxis.set_major_formatter(FormatStrFormatter("%.02f"))
@@ -138,7 +140,7 @@ def plotFranke(save=False):
     ax.view_init(elev=15, azim=45)
     plt.show()
     if save:
-        fig.savefig(fig_path("Franke_func.png"), dpi=300)
+        fig.savefig(fig_path("Franke_func.png"), dpi=300, transparent=True)
 
 
 def plot_CI(CI, save=False):
@@ -158,4 +160,5 @@ def plot_CI(CI, save=False):
     plt.yticks(np.arange(len(CI)), labels)
     plt.show()
     if save:
-        fig.savefig(fig_path("beta_confidence_interval.png"), dpi=300)
+        fig.savefig(fig_path("beta_confidence_interval.png"),
+                    dpi=300, transparent=True)
