@@ -10,7 +10,7 @@
 > * kfold 
 
 ## Testing 
-* FysStk-project1-mylearn.ipynb contains:
+* FysStk-project1-mylearn.ipynb contains (needs to be in same folder as mylearn):
 > * calculation of the MSE 
 > * plotting of test vs train as function of complexity 
 > * bias vs variance with bootstrap
