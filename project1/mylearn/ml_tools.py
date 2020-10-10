@@ -143,7 +143,7 @@ def plotFranke(save=False):
         fig.savefig(fig_path("Franke_func.png"), dpi=300, transparent=True)
 
 
-def plot_CI(CI, save=False):
+def plot_CI(CI, sigma, save=False):
 
     labels = []
     for i in range(1, len(CI) + 1):
@@ -158,9 +158,10 @@ def plot_CI(CI, save=False):
         plt.plot(CI[i], (i, i), "o", color=cmap(norm(i)))
 
     plt.yticks(np.arange(len(CI)), labels)
+    plt.title(r'Confidence interval, $\sigma$ = %g' % sigma)
     plt.show()
     if save:
-        fig.savefig(fig_path("beta_confidence_interval.png"), dpi=300)
+        fig.savefig(fig_path("beta_confidence_interval_N=10_sigma1.png"), dpi=300)
 
 def Kfold(k, deg, n):
     x = np.random.rand(n)
