@@ -158,7 +158,7 @@ def plot_CI(CI, sigma, save=False):
         plt.plot(CI[i], (i, i), "o", color=cmap(norm(i)))
 
     plt.yticks(np.arange(len(CI)), labels)
-    plt.title(r'Conference interval, $\sigma$ = %g' % sigma)
+    plt.title(r'Confidence interval, $\sigma$ = %g' % sigma)
     plt.show()
     if save:
         fig.savefig(fig_path("beta_confidence_interval.png"), dpi=300)
