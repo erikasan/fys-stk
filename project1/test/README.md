@@ -7,5 +7,5 @@ In this folder we have the notebook and two python files that test the code. We 
 > * implementation of k-fold as a function of complexity
 > * implementation of the methods on terrain data
 
-* Ridge assessment
-* Lasso assessment 
+* Ridge plotting
+* Lasso plotting 
