@@ -160,10 +160,6 @@ def plot_CI(CI, save=False):
     plt.yticks(np.arange(len(CI)), labels)
     plt.show()
     if save:
-<<<<<<< HEAD
-        fig.savefig(fig_path("beta_confidence_interval.png"),
-                    dpi=300, transparent=True)
-=======
         fig.savefig(fig_path("beta_confidence_interval.png"), dpi=300)
 
 def Kfold(k, deg, n):
@@ -194,4 +190,3 @@ def Kfold(k, deg, n):
         estimated_mse_KFold_train = score_train/k
         estimated_mse_KFold_test = score_test/k
     return estimated_mse_KFold_test, estimated_mse_KFold_train
->>>>>>> 17c3623c662b5ab4373b906fb5991d01376e7244
