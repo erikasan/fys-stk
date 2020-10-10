@@ -8,7 +8,7 @@ from matplotlib import cm
 from matplotlib.ticker import FormatStrFormatter, LinearLocator
 from mpl_toolkits.mplot3d import Axes3D
 from mylearn.project_tools import fig_path
-
+from mylearn.linear_model import LinearRegression
 
 def rss(ytilde, y):
     """
@@ -160,5 +160,38 @@ def plot_CI(CI, save=False):
     plt.yticks(np.arange(len(CI)), labels)
     plt.show()
     if save:
+<<<<<<< HEAD
         fig.savefig(fig_path("beta_confidence_interval.png"),
                     dpi=300, transparent=True)
+=======
+        fig.savefig(fig_path("beta_confidence_interval.png"), dpi=300)
+
+def Kfold(k, deg, n):
+    x = np.random.rand(n)
+    y = np.random.rand(n)
+    z = frankeFunction(x, y) + 0.05*np.random.normal(0, 1, n)
+    X = designMatrix(x, y, deg, with_intercept=False)
+    j = np.arange(len(z))
+    np.random.shuffle(j)
+    split = np.split(j, k)
+    score_train = 0
+    score_test= 0
+    for i in range(k):
+        train =np.concatenate((split[:i]+split[i+1:]))
+        test = split[i]
+        X_train = np.array(X[train])
+        z_train = np.array(z[train])
+        X_test = np.array(X[test])
+        z_test = np.array(z[test])
+        X_train_scaled, X_test_scaled = normalize_data(X_train, X_test, with_intercept=False)
+        z_train_scaled, z_test_scaled = normalize_target(z_train, z_test)
+
+        ols_linreg = LinearRegression(fit_intercept=True)
+        ols_linreg.fit(X_train_scaled, z_train_scaled)
+
+        score_train += ols_linreg.mse(X_train_scaled, z_train_scaled)
+        score_test += ols_linreg.mse(X_test_scaled, z_test_scaled)
+        estimated_mse_KFold_train = score_train/k
+        estimated_mse_KFold_test = score_test/k
+    return estimated_mse_KFold_test, estimated_mse_KFold_train
+>>>>>>> 17c3623c662b5ab4373b906fb5991d01376e7244
