@@ -161,7 +161,7 @@ def plot_CI(CI, sigma, save=False):
     plt.title(r'Confidence interval, $\sigma$ = %g' % sigma)
     plt.show()
     if save:
-        fig.savefig(fig_path("beta_confidence_interval_N=100_sigma1.png"), dpi=300)
+        fig.savefig(fig_path("beta_confidence_interval_N=10_sigma1.png"), dpi=300)
 
 def Kfold(k, deg, n):
     x = np.random.rand(n)
