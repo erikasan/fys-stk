@@ -22,11 +22,11 @@ y = np.random.rand(n_datapoints)
 z = FrankeFunction(x, y) + 0.05*np.random.normal(0, 1, n_datapoints)
 
 
-p_min = 2
-p_max = 30
+p_min = 20
+p_max = 33
 polynomial_degrees = np.arange(p_min, p_max + 1, 1)
 
-lambdas = np.logspace(-20, -1, 50)
+lambdas = np.logspace(-20, -6, 10)
 
 x_train, x_test, y_train, y_test, z_train, z_test = train_test_split(x, y, z, test_size = 0.2)
 
@@ -44,7 +44,7 @@ for j, p in enumerate(polynomial_degrees):
     X        = designMatrix(x, y, p, with_intercept = False)
     X_scaled = scaler.fit_transform(X)
     for i, lam in enumerate(lambdas):
-        lasso_reg       = Lasso(alpha = lam)#, warm_start = True, precompute = True)
+        lasso_reg       = Lasso(alpha = lam, tol = 1e-3, warm_start = True, precompute = True)
         MSE_cross[i, j] = np.mean(-cross_val_score(lasso_reg, X_scaled, z, scoring = 'neg_mean_squared_error'))
 
 for j, p in enumerate(polynomial_degrees):
@@ -55,7 +55,7 @@ for j, p in enumerate(polynomial_degrees):
     X_test_scaled  = scaler.fit_transform(X_test)
 
     for i, lam in enumerate(lambdas):
-        lasso_reg = Lasso(alpha = lam)#, warm_start = True, precompute = True)
+        lasso_reg = Lasso(alpha = lam, tol = 1e-3, warm_start = True, precompute = True)
 
         for B in range(bootstraps):
             X_, z_                = resample(X_train_scaled, z_train)
