@@ -21,7 +21,7 @@ All code written by Oda Hovet (odasho), Ilse Kuperus (ilseku) and Erik Alexander
 
 
 ## Figures
-* result images
+* Result images
 
 ## Drafts
 * Codes not used for final results
